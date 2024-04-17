@@ -1,0 +1,82 @@
+package com.masai.taskmanagement.servicess.Impl;
+
+import java.util.ArrayList;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.masai.taskmanagement.Exception.TaskException;
+import com.masai.taskmanagement.Exception.taskIsNotPresentException;
+import com.masai.taskmanagement.entity.Task;
+import com.masai.taskmanagement.repository.TaskRepository;
+import com.masai.taskmanagement.servicess.TaskService;
+
+@Service
+public class TaskImpl implements TaskService{
+	
+	@Autowired
+	private TaskRepository repo;
+
+	@Override
+	public Task crateTask(Task task) throws TaskException {
+		if(task == null) {
+			throw new TaskException("Task Data is Null ! ");
+		}
+		Task save = this.repo.save(task);
+		return save;
+	}
+
+	@Override
+	public Task updateTask(Long task_id, Task task) throws taskIsNotPresentException {
+		Optional<Task> optionalTask = this.repo.findById(task_id);
+		if(!optionalTask.isPresent()) {
+			throw new taskIsNotPresentException("task is not present with "+task_id);
+		}
+		Task task2 = optionalTask.get();
+		task2.setCompleted(task.isCompleted());
+		task2.setDescription(task.getDescription());
+		task2.setDueDate(task.getDueDate());
+		task2.setName(task.getName());
+		task2.setPriority(task.getPriority());
+		task2.setSubTasks(task.getSubTasks());
+		Task save = this.repo.save(task2);
+		return save;
+	}
+
+	@Override
+	public Task deleteTask(Long task_id) throws taskIsNotPresentException {
+		Optional<Task> optionalTask = this.repo.findById(task_id);
+		if(!optionalTask.isPresent()) {
+			throw new taskIsNotPresentException("task is not present with "+task_id);
+		}
+		Task task2 = optionalTask.get();
+		this.repo.deleteById(task_id);
+		return task2;
+	}
+
+	@Override
+	public Task complateTask(Long id) throws taskIsNotPresentException {
+		Optional<Task> optionalTask = this.repo.findById(id);
+		if(!optionalTask.isPresent()) {
+			throw new taskIsNotPresentException("task is not present with "+id);
+		}
+		Task task2 = optionalTask.get();
+		task2.setCompleted(true);
+		Task save = this.repo.save(task2);
+		return save;
+	}
+
+	@Override
+	public ArrayList<Task> showAllTask() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Task getTaskById(Long taskId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

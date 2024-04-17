@@ -1,0 +1,13 @@
+package com.masai.taskmanagement;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TaskManagemenApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(TaskManagemenApplication.class, args);
+	}
+
+}

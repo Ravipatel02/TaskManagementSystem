@@ -1,0 +1,11 @@
+package com.masai.taskmanagement.servicess;
+
+import com.masai.taskmanagement.entity.SubTask;
+
+public interface SubTaskservice {
+	SubTask crateTask(SubTask task);
+	SubTask updateTask(Long task_id , SubTask task);
+	SubTask deleteTask(Long task_id);
+	SubTask complateTask(Long id);
+
+}

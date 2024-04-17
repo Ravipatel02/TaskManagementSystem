@@ -1,0 +1,19 @@
+package com.masai.taskmanagement.servicess;
+
+import java.util.ArrayList;
+
+import com.masai.taskmanagement.Exception.TaskException;
+import com.masai.taskmanagement.entity.Task;
+
+public interface TaskService {
+	
+	Task crateTask(Task task) throws TaskException;
+	Task updateTask(Long task_id , Task task);
+	Task deleteTask(Long task_id);
+	Task complateTask(Long id);
+	
+	ArrayList<Task> showAllTask();
+	
+	Task getTaskById(Long taskId);
+
+}

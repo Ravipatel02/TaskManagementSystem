@@ -1,0 +1,48 @@
+package com.masai.taskmanagement.servicess.Impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.masai.taskmanagement.Exception.taskIsNotPresentException;
+import com.masai.taskmanagement.entity.SubTask;
+import com.masai.taskmanagement.repository.SubTaskRepository;
+import com.masai.taskmanagement.servicess.SubTaskservice;
+
+@Service
+public class SubTaskImpl implements SubTaskservice {
+	@Autowired
+	private SubTaskRepository repo;
+
+	@Override
+	public SubTask crateTask(SubTask task) {
+		this.repo.save(task);
+	}
+
+	@Override
+	public SubTask updateTask(Long task_id, SubTask task) throws taskIsNotPresentException {
+		Optional<SubTask> subTask = this.repo.findById(task_id);
+		if(!subTask.isPresent()) {
+			throw new taskIsNotPresentException("task is not present with "+task_id);
+		}
+		SubTask subTask2 = subTask.get();
+		subTask2.setName(task.getName());
+		subTask2.setCompleted(task.isCompleted());
+		SubTask save = this.repo.save(subTask2);
+		return save;
+	}
+
+	@Override
+	public SubTask deleteTask(Long task_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SubTask complateTask(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

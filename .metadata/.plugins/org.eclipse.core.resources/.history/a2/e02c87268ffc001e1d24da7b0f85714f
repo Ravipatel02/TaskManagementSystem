@@ -1,0 +1,51 @@
+package com.masai.taskmanagement.servicess.Impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.yaml.snakeyaml.emitter.EmitterException;
+
+import com.masai.taskmanagement.Exception.EmailExitException;
+import com.masai.taskmanagement.entity.User;
+import com.masai.taskmanagement.repository.UserRepo;
+import com.masai.taskmanagement.servicess.UserService;
+
+public class UserImpl  implements UserService{
+	@Autowired
+	private UserRepo repo;
+
+	@Override
+	public User createUser(User user) throws EmailExitException {
+		Optional<User> byEmail = this.repo.findByEmail(user.getEmail());
+		if(!byEmail.isPresent()) {
+			this.repo.save(user);
+		}
+		
+		throw new EmailExitException("Email Id allready exit !");
+	}
+
+	@Override
+	public User deleteUser(Integer userId) throws EmailExitException {
+		Optional<User> optinaluser = this.repo.findById(userId);
+		if(!optinaluser.isPresent()) {
+			throw new  EmailExitException("User not Exit with "+userId);
+		}
+		User user = optinaluser.get();
+		this.repo.deleteById(userId);
+		return user;
+	}
+
+	@Override
+	public User updateUser(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		List<User> all = this.repo.findAll();
+		return all;
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.masai.taskmanagement.Exception;
+
+public class EmailExitException {
+
+}

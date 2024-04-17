@@ -1,0 +1,5 @@
+package com.masai.taskmanagement.entity;
+
+public class Task {
+
+}

@@ -1,0 +1,15 @@
+package com.masai.taskmanagement.servicess;
+
+import java.util.List;
+
+import com.masai.taskmanagement.entity.User;
+
+public interface UserService {
+	
+	User createUser(User user);
+	User deleteUser(Integer userId);
+	User updateUser(Integer userId);
+	
+	List<User> getAllUsers();
+
+}
