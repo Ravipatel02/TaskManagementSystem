@@ -7,3 +7,21 @@ Authentication Method:
 
 
 Swagger URL Frontend----->http://localhost:8080/swagger-ui/index.html
+
+
+## Setup
+
+# Clone the repository: git clone <repository-url>
+# Install dependencies: mvn clean install
+# Need Chenge Application property
+# Only change database credencial like this
+# spring.datasource.url=jdbc:mysql://localhost:3306/user
+
+# spring.datasource.username=root
+
+# spring.datasource.password=root
+
+# spring.jpa.hibernate.ddl-auto=update
+
+# Run the application: mvn spring-boot:run
+# Access the API endpoints using the provided URLs.
